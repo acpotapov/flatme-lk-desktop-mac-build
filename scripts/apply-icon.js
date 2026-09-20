@@ -12,7 +12,11 @@ const { execFileSync } = require('child_process');
 
 const CACHE_ROOT = path.join(process.env.LOCALAPPDATA || '', 'electron-builder', 'Cache', 'winCodeSign');
 const EXE_PATH = path.join(__dirname, '..', 'dist', 'win-unpacked', 'Спам-монитор FLATME.exe');
-const ICON_PATH = path.join(__dirname, '..', 'build', 'icon.ico');
+// electron-builder сам генерирует .ico из build/icon.png при каждой сборке
+// (мы намеренно не коммитим свой .ico - см. build/icon.png как единственный
+// источник правды) и кладёт сюда - берём именно этот, свежий, а не рискуем
+// подсунуть устаревший файл.
+const ICON_PATH = path.join(__dirname, '..', 'dist', '.icon-ico', 'icon.ico');
 
 function findRcedit() {
   if (!fs.existsSync(CACHE_ROOT)) return null;
