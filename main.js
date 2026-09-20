@@ -1,4 +1,4 @@
-const { app, BrowserWindow, screen, Menu } = require('electron');
+const { app, BrowserWindow, screen, Menu, dialog } = require('electron');
 const fs = require('fs');
 const path = require('path');
 
@@ -46,7 +46,17 @@ function guardNavigation(event, urlString, win) {
     // will-navigate/will-redirect (сразу после preventDefault) у Electron
     // ненадёжно приводит к реальной новой навигации.
     setImmediate(() => win.loadURL(`${SITE_ORIGIN}/spam-monitor`));
+    return;
   }
+  // Любая другая заблокированная страница (например, кто-то всё же нажал
+  // спрятанный пункт меню на неполностью обновившейся странице) - явно
+  // объясняем, а не просто молча остаёмся на месте.
+  dialog.showMessageBox(win, {
+    type: 'info',
+    title: 'Спам-монитор FLATME',
+    message: 'Страница доступна только в полной версии портала на сайте',
+    buttons: ['OK'],
+  });
 }
 
 const DEFAULT_WIDTH = 360;
