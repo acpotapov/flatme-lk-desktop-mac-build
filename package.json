@@ -6,7 +6,7 @@
   "scripts": {
     "start": "electron .",
     "dist": "electron-builder --win portable & node scripts/apply-icon.js",
-    "dist:mac": "electron-builder --mac zip"
+    "dist:mac": "electron-builder --mac zip --publish=never"
   },
   "author": "FLATME",
   "license": "UNLICENSED",
@@ -17,6 +17,7 @@
   "build": {
     "appId": "ru.flatme.lk-desktop",
     "productName": "Спам-монитор FLATME",
+    "publish": null,
     "files": ["main.js", "package.json"],
     "win": {
       "target": "portable",
