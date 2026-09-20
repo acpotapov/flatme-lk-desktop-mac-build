@@ -1,0 +1,30 @@
+{
+  "name": "flatme-lk-desktop",
+  "version": "1.0.0",
+  "description": "FLATME - маленькое окно кабинета менеджера (спам-монитор номеров), поверх остальных окон",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win portable & node scripts/apply-icon.js",
+    "dist:mac": "electron-builder --mac zip"
+  },
+  "author": "FLATME",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "electron": "^32.0.0",
+    "electron-builder": "^25.0.0"
+  },
+  "build": {
+    "appId": "ru.flatme.lk-desktop",
+    "productName": "Спам-монитор FLATME",
+    "files": ["main.js", "package.json"],
+    "win": {
+      "target": "portable",
+      "icon": "build/icon.ico"
+    },
+    "mac": {
+      "target": "zip",
+      "category": "public.app-category.business"
+    }
+  }
+}
